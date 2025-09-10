@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast and Furious</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5dc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            height: 10%;
+            background-color: wheat;
+            padding: 0;
+        }
+
+        .header-container {
+            width: 100%;
+            height: 100%;
+            background-color: cadetblue;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 10%;
+            text-align: right;
+            padding: 5px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .title {
+            width: 100%;
+            color: wheat;
+            text-align: center;
+        }
+
+        .title h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .spacer {
+            width: 80%;
+        }
+
+        .main-content {
+            width: 100%;
+            height: 90vh;
+            opacity: 0.8;
+            background-image: url('./images/main.jpg');
+            background-size: cover;
+            background-position: top;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-page {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 27px;
+        }
+
+        .color-button {
+            display: inline-block;
+            background-color: #1ebc63;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px;
+            text-decoration: none;
+        }
+
+        .color-button:hover {
+            background-color: #1ad6a4;
+            transform: scale(1.05);
+            text-decoration: none;
+
+        }
+
+        .color-button h2 {
+            color: rgba(14,14,18,0.8);
+            font-size: 2em;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        .color-button:hover h2 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-page {
+                flex-direction: column;
+            }
+
+            .logo {
+                width: 20%;
+            }
+
+            .spacer {
+                width: 60%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="./images/лого.jpg" alt="Fast and Furious Logo">
+        </div>
+        <div class="title">
+            <h1>Fast and Furious</h1>
+        </div>
+        <div class="spacer"></div>
+    </div>
+</header>
+
+<main class="main-content">
+    <nav class="main-page">
+        <a class="color-button" href="Family.html">
+            <h2>Персонажи</h2>
+        </a>
+        <a class="color-button" href="Locations.html">
+            <h2>Локации</h2>
+        </a>
+        <a class="color-button" href="sikvels.html">
+            <h2>Сиквел</h2>
+        </a>
+        <a class="color-button" href="Cars2.html">
+            <h2>Машины</h2>
+        </a>
+    </nav>
+</main>
+</body>
+</html>

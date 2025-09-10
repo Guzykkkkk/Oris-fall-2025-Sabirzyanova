@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Локации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: wheat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            height: 10vh;
+            background-color: wheat;
+        }
+
+        .header-container {
+            width: 100%;
+            height: 100%;
+            background-color: cadetblue;
+            display: flex;
+            align-items: center;
+            border: 1px solid #000;
+        }
+
+        .logo {
+            width: 10%;
+            text-align: right;
+            padding: 5px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .title {
+            flex: 1;
+            color: wheat;
+            text-align: center;
+        }
+
+        .title h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .spacer {
+            width: 80%;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .countries-wide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .country-card {
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            height: 400px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .country-header {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .country-header h3 {
+            color: wheat;
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .country-content {
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .country-description {
+            text-align: center;
+        }
+
+        .country-description h4 {
+            font-weight: normal;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .back-button-container {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .back-button {
+            background-color: #375859;
+            color: #ffffff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: indigo;
+        }
+
+        @media (max-width: 1200px) {
+            .countries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .navigation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .countries-grid,
+            .countries-wide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 2em;
+            }
+
+            .logo {
+                width: 15%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 0;
+            }
+
+            .logo {
+                width: 20%;
+                text-align: center;
+            }
+
+            .spacer {
+                display: none;
+            }
+
+            .country-card {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="./images/лого.jpg" alt="Fast and Furious Logo">
+        </div>
+        <div class="title">
+            <h1>FAMILY</h1>
+        </div>
+        <div class="spacer"></div>
+    </div>
+</header>
+
+<main>
+    <div class="countries-grid">
+        <div class="country-card" style="background-image: url('./images/Tokiyo.jpg')">
+            <div class="country-header">
+                <h3>Токио</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.6)">
+                <div class="country-description">
+                    <h4><strong>
+                        «Форсаж: Токийский дрифт» стал первым фильмом в серии, действие которого происходит за<br/>
+                        пределами США. Съёмки проходили в столице Японии, а ключевая сцена была снята на оживлённом<br/>
+                        перекрёстке Сибуя, где на красный свет останавливаются все машины, а сотни пешеходов переходят<br/>
+                        дорогу, как муравьи. Из-за строгих правил в Токио бывает сложно получить разрешение на съёмки,<br/>
+                        поэтому «Токийскому дрифту» пришлось использовать продуманное сочетание кадров, снятых на натуре,<br/>
+                        и визуальных эффектов, чтобы создать запоминающуюся сцену «дрифта» Лукаса Блэка и Сон Канга.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="country-card" style="background-image: url('./images/LA.jpg')">
+            <div class="country-header">
+                <h3>Лос-Анджелес</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.5)">
+                <div class="country-description">
+                    <h4><strong>
+                        В фильмах «Форсаж» все дороги в конечном счёте ведут на Норт-Ист-Кенсингтон-роуд, 722, <br/>
+                        в Лос-Анджелесе. Это двухэтажное бунгало в этнически разнообразном районе Эхо-Парк (в фильмах<br/>
+                        оно обозначено номером 1327) служит домом для постоянно растущей семьи Дома Торетто и его<br/>
+                        верного Dodge Charger. Дом появлялся в фильмах «Форсаж» с самого первого фильма в 2001<br/>
+                        году — до тех пор, пока в «Форсаж 7» Декард Шоу в исполнении Джейсона Стэтхэма не превратил<br/>
+                        его в пылающие руины.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="country-card" style="background-image: url('./images/Rio.jpg')">
+            <div class="country-header">
+                <h3>Рио Де Жанейро</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.6)">
+                <div class="country-description">
+                    <h4><strong>
+                        Появление агента Управления по борьбе с наркотиками Люка Хоббса в исполнении Дуэйна Джонсона придало сериалу новую энергию,<br/>
+                        как и сюжетная линия, в которой герои планируют ограбление, чтобы выкрасть 100 миллионов долларов у нечистого на руку <br/>
+                        южноамериканского бизнесмена. Действие происходило в Бразилии, а достопримечательности Рио — гора<br/>
+                        Сахарная голова и статуя Христа-Искупителя занимали видное место на экране. Пляж Копакабана также<br/>
+                        использовался как место встречи команды Торетто, участвующей в ограблении. По волшебству кинематографа<br/>
+                        погоня по крышам фавел Рио на самом деле снималась в Пуэрто-Рико, а не в Бразилии.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="countries-grid">
+        <div class="country-card" style="background-image: url('./images/London.jpg')">
+            <div class="country-header">
+                <h3>Лондон</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.5)">
+                <div class="country-description">
+                    <h4><strong>
+                        В фильме «Форсаж 6» Дом Торетто и его команда противостоят британскому спецназовцу Оуэну Шоу<br/>
+                        (Люк Эванс), который вышел из-под контроля. Естественно, это означало, что им придётся отправиться<br/>
+                        в Великобританию. В фильме была захватывающая гонка, в которой Дизель и Мишель Родригес мчались по <br/>
+                        улицам центра Лондона. Выехав со двора Министерства иностранных дел и по делам Содружества в Вестминстере,<br/>
+                        Dodge Charger Daytona и Jensen Interceptor проносятся через Уайтхолл и Пикадилли-Серкус и оказываются в тени<br/>
+                        электростанции Баттерси. В другом месте зоркие лондонцы могут заметить Ламбетский мост в Миллбанке, который<br/>
+                        превращается в Москву.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="country-card" style="background-image: url('./images/АбуДаби.jpg')">
+            <div class="country-header">
+                <h3>Абу-Даби</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.5)">
+                <div class="country-description">
+                    <h4><strong>
+                        Фильмы «Форсаж» могут похвастаться множеством безумных трюков: прыжок из танка, пролетающего над мостом, прыжки с парашютом из самолётов<br/>
+                        в автомобилях... всё это впечатляет, но Объединённые Арабские Эмираты стали местом для одного из самых зрелищных трюков. В «Форсаже 7» Тореттo<br/>
+                        и Брайан О'Коннор в исполнении Пола Уокера пересекают горизонт Абу-Даби, проезжая на суперкаре Lykan HyperSport стоимостью 3,4 миллиона долларов<br/>
+                        США через один небоскреб и въезжая в другой... а затем из второго небоскреба в третий, после чего выпрыгивают из машины, когда она падает на землю.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="country-card" style="background-image: url('./images/ньюйорк.jpg')">
+            <div class="country-header">
+                <h3>Нью-Йорк</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.6)">
+                <div class="country-description">
+                    <h4><strong>
+                        Прошло немало времени, но «Форсаж» наконец-то выходит на улицы Нью-Йорка в своей последней части.<br/>
+                        «Большое яблоко» — не самое подходящее место для скоростной езды, но «Форсаж 8» находит способ <br/>
+                        благодаря хакерше Сайфер в исполнении Шарлиз Терон, которая дистанционно управляет машинами на <br/>
+                        Манхэттене и устраивает хаос. Съёмочной группе даже удалось перекрыть оживлённые улицы Таймс-сквер,<br/>
+                        чтобы снять часть тщательно продуманной погони с участием Доминика Торетто, бывшего хорошего парня,<br/>
+                        а теперь злодея.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="countries-wide-grid">
+        <div class="country-card" style="background-image: url('./images/миватн.jpg')">
+            <div class="country-header">
+                <h3>Миватн, Исландия</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.4)">
+                <div class="country-description">
+                    <h4><strong>
+                        Всё, от «Бэтмен: Начало» до «Игры престолов», было снято в Исландии, но «Форсаж 8» — первый фильм,<br/>
+                        съёмки которого проходили на озере Миватн на севере страны. Съёмочная группа два месяца работала над <br/>
+                        трюками в этом потрясающем месте, расположенном недалеко от действующего вулкана Крафла. На фоне<br/>
+                        Миватна можно увидеть, как автомобиль врезается в лёд, как подводная лодка всплывает сквозь лёд, а<br/>
+                        Дуэйн Джонсон пытается вручную изменить курс ракеты, которая на высокой скорости приближается к цели.<br/>
+                        Захватывающее зрелище!
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="country-card" style="background-image: url('./images/Гавана.jpg')">
+            <div class="country-header">
+                <h3>Гавана, Куба</h3>
+            </div>
+            <div class="country-content" style="background-color: rgba(255, 255, 255, 0.6)">
+                <div class="country-description">
+                    <h4><strong>
+                        После холодной войны дипломатические отношения между Соединёнными Штатами и Кубой были<br/>
+                        восстановлены только в 2015 году. Это означало, что ни один голливудский фильм не мог быть снят на<br/>
+                        острове и его архипелагах. Все изменилось благодаря мощи сериала "Форсаж". ""Форсаж 8" вошел в историю,<br/>
+                        став первым крупным американским фильмом, съемки которого проходили в Гаване. Здесь проходят уличные гонки <br/>
+                        между двумя винтажными американскими автомобилями 50-х годов, в мире, далеком от мощных моторов из предыдущих <br/>
+                        быстрых фильмов.
+                    </strong></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="navigation-grid">
+        <div class="back-button-container">
+            <a href="Main2.html" class="back-button">
+                <h2>Главная</h2>
+            </a>
+        </div>
+        <div class="back-button-container">
+            <a href="sikvels.html" class="back-button">
+                <h2>Сиквел</h2>
+            </a>
+        </div>
+        <div class="back-button-container">
+            <a href="Family.html" class="back-button">
+                <h2>Персонажи</h2>
+            </a>
+        </div>
+        <div class="back-button-container">
+            <a href="Cars2.html" class="back-button">
+                <h2>Машины</h2>
+            </a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
