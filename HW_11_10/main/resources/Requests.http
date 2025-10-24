@@ -1,0 +1,9 @@
+GET localhost:8082/params?p1=123666
+
+###
+GET localhost:8082/
+
+###
+GET localhost:8082/headers
+X-User-Name: Honor
+X-User-Email: example@mail.com
