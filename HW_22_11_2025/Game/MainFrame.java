@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+//20%, что левая ракетка не отобъёт мячик
 
 public class MainFrame extends JPanel implements ActionListener, KeyListener {
     private static final int WIDTH = 800;
@@ -12,19 +13,29 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
     private static final int PADDLE_HEIGHT = 100;
     private static final int BALL_SIZE = 20;
     private static final int PADDLE_SPEED = 10;
+    private static final int AI_SPEED = 5;
+    private static final double SMOOTHING_FACTOR = 0.1;
+    private static final double AI_ACCURACY = 0.8;
 
     private Timer timer;
     private int ballX, ballY;
     private int ballSpeedX = 5, ballSpeedY = 5;
     private int player1Y, player2Y;
     private int score1 = 0, score2 = 0;
-    private boolean upPressed, downPressed, wPressed, sPressed;
+    private boolean upPressed, downPressed;
+
+    private double aiTargetY;
+    private double aiCurrentY;
+    private Random random;
+    private double aiReactionDelay;
 
     public MainFrame() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
+
+        random = new Random();
 
         resetGame();
 
@@ -38,11 +49,39 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
         player1Y = HEIGHT / 2 - PADDLE_HEIGHT / 2;
         player2Y = HEIGHT / 2 - PADDLE_HEIGHT / 2;
 
+        aiCurrentY = player1Y;
+        aiTargetY = player1Y;
+        aiReactionDelay = 0;
+
         Random rand = new Random();
         ballSpeedX = rand.nextBoolean() ? 5 : -5;
         ballSpeedY = rand.nextBoolean() ? 5 : -5;
     }
 
+    private void updateAI() {
+        if (aiReactionDelay > 0) {
+            aiReactionDelay--;
+            return;
+        }
+        double targetOffset = 0;
+        if (random.nextDouble() > AI_ACCURACY) {
+            targetOffset = (random.nextDouble() - 0.5) * PADDLE_HEIGHT;
+        }
+
+        aiTargetY = ballY - PADDLE_HEIGHT / 2 + BALL_SIZE / 2 + targetOffset;
+
+        aiTargetY = Math.max(0, Math.min(aiTargetY, HEIGHT - PADDLE_HEIGHT));
+
+        double difference = aiTargetY - aiCurrentY;
+        aiCurrentY += difference * SMOOTHING_FACTOR;
+        aiCurrentY = Math.max(0, Math.min(aiCurrentY, HEIGHT - PADDLE_HEIGHT));
+
+        player1Y = (int) aiCurrentY;
+
+        if (random.nextDouble() > 0.95) {
+            aiReactionDelay = random.nextInt(5) + 5;
+        }
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -65,10 +104,10 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
     }
 
     private void update() {
-        if (wPressed && player1Y > 0) player1Y -= PADDLE_SPEED;
-        if (sPressed && player1Y < HEIGHT - PADDLE_HEIGHT) player1Y += PADDLE_SPEED;
         if (upPressed && player2Y > 0) player2Y -= PADDLE_SPEED;
         if (downPressed && player2Y < HEIGHT - PADDLE_HEIGHT) player2Y += PADDLE_SPEED;
+
+        updateAI();
 
         ballX += ballSpeedX;
         ballY += ballSpeedY;
@@ -76,7 +115,6 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
         if (ballY <= 0 || ballY >= HEIGHT - BALL_SIZE) {
             ballSpeedY = -ballSpeedY;
         }
-
 
         if (ballX <= 20 + PADDLE_WIDTH &&
                 ballY + BALL_SIZE >= player1Y &&
@@ -109,8 +147,6 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> wPressed = true;
-            case KeyEvent.VK_S -> sPressed = true;
             case KeyEvent.VK_UP -> upPressed = true;
             case KeyEvent.VK_DOWN -> downPressed = true;
         }
@@ -119,8 +155,6 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> wPressed = false;
-            case KeyEvent.VK_S -> sPressed = false;
             case KeyEvent.VK_UP -> upPressed = false;
             case KeyEvent.VK_DOWN -> downPressed = false;
         }
@@ -128,5 +162,4 @@ public class MainFrame extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {}
-
 }
