@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: chatting
+      POSTGRES_PASSWORD: qwerty007
+      POSTGRES_DB: user_restrictions_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    image: user-restrictions:1.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/user_restrictions_db
+      DB_USER: chatting
+      DB_PASS: secret
+
+volumes:
+  pgdata:
