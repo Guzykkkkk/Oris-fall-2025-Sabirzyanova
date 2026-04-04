@@ -1,5 +1,4 @@
-docker pull guzykkkkk/f-mobile-site:latest
-docker run -p 8080:8080 guzykkkkk/f-mobile-site:latest
+docker push guzykkkkk/f-mobile-site:tagname
 ## Docker
 
 Сборка образа:
