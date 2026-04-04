@@ -1,4 +1,6 @@
 docker push guzykkkkk/f-mobile-site:tagname
+
+guzykkkkk/f-mobile-site:latest
 ## Docker
 
 Сборка образа:
