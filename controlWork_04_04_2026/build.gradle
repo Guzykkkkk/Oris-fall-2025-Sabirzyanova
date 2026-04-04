@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'org.Game'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc:5.3.39'
+    implementation 'org.springframework:spring-context-support:5.3.39'
+    implementation 'org.springframework:spring-jdbc:5.3.39'
+    implementation 'org.freemarker:freemarker:2.3.32'
+    implementation 'org.postgresql:postgresql:42.6.0'
+
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    implementation 'org.springframework:spring-context-support:5.3.39'
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.glassfish:javax.el:3.0.1-b11'
+    implementation 'org.springframework.data:spring-data-jpa:2.7.18'
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'org.springframework:spring-tx:5.3.39'
+    implementation 'org.springframework:spring-orm:5.3.39'
+
+    implementation 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+war {
+    archiveBaseName = 'f-mobile-site'
+    archiveVersion = ''
+    archiveClassifier = ''
+}
+
+test {
+    useJUnitPlatform()
+}
