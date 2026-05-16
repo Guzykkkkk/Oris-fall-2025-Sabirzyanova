@@ -23,6 +23,18 @@
 
 <#if dialogs?has_content>
     <#list dialogs as dialog>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <@spring.message "feed.title"/>
+            </h1>
+
+            <form action="/logout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <button class="btn btn-outline-danger btn-sm" type="submit">
+                    <@spring.message "nav.logout"/>
+                </button>
+            </form>
+        </div>
         <div class="dialog">
             <h3>
                 <a href="/feed/${dialog.interlocutor.id}">

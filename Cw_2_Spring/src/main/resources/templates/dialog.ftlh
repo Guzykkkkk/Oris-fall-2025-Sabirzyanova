@@ -35,9 +35,22 @@
         </#list>
     <#else>
         <p>Сообщений пока нет. Напишите первое сообщение!</p>
+    </#if><#if errors?? && errors.hasFieldErrors('text')>
+        <div class="text-danger small mt-1">
+            ${errors.getFieldError('text').defaultMessage}
+        </div>
     </#if>
-</div>
 
+    <button class="btn btn-primary mt-3" type="submit">
+        <@spring.message "dialog.send"/>
+    </button>
+</div>
+</form>
+
+<#assign lastMessageId = 0>
+<#if messages?has_content>
+<#assign lastMessageId = messages[messages?size - 1].id>
+</#if>
 <form action="/feed/${recipientId}" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <textarea name="text" rows="3" placeholder="Ваше сообщение..." required></textarea><br>
@@ -45,3 +58,57 @@
 </form>
 </body>
 </html>
+
+<script>
+    let lastMessageId = ${lastMessageId?c};
+    const recipientId = ${recipientId?c};
+
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.innerText = text;
+        return div.innerHTML;
+    }
+
+    function appendMessage(message) {
+        const messagesContainer = document.getElementById("messages");
+
+        if (document.querySelector('[data-message-id="' + message.id + '"]')) {
+            return;
+        }
+
+        const emptyAlert = messagesContainer.querySelector(".alert");
+        if (emptyAlert) {
+            emptyAlert.remove();
+        }
+
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "message " + (message.own ? "my-message" : "other-message");
+        messageDiv.dataset.messageId = message.id;
+
+        messageDiv.innerHTML =
+            '<div class="message-meta">' +
+            '<strong>' + escapeHtml(message.senderUsername) + '</strong>' +
+            ' · ' + escapeHtml(message.sentAt) +
+            (message.read ? ' ✓' : '') +
+            '</div>' +
+            '<div class="message-text">' + escapeHtml(message.text) + '</div>';
+
+        messagesContainer.appendChild(messageDiv);
+        lastMessageId = Math.max(lastMessageId, message.id);
+    }
+
+    function loadNewMessages() {
+        fetch("/feed/" + recipientId + "/new?afterId=" + lastMessageId)
+            .then(response => response.json())
+            .then(messages => {
+                messages.forEach(appendMessage);
+            })
+            .catch(error => console.error("Polling error:", error));
+    }
+
+    setInterval(loadNewMessages, 5000);
+</script>
+
+
+
+
