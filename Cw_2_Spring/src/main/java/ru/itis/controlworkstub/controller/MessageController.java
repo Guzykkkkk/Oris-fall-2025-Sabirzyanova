@@ -34,10 +34,12 @@ public class MessageController {
     @GetMapping("/{userId}")
     public String dialog(@PathVariable Long userId, Model model) {
         String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+
         model.addAttribute("messages", messageService.getConversationWith(userId));
-        // Передаём ID собеседника, чтобы форма отправки знала, кому писать
         model.addAttribute("recipientId", userId);
         model.addAttribute("currentUsername", currentUsername);
+        model.addAttribute("messageForm", new MessageForm());
+
         return "dialog";
     }
 
@@ -64,4 +66,5 @@ public class MessageController {
 
         return "redirect:/feed/" + userId;
     }
+
 }
